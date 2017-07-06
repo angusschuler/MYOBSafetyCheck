@@ -292,17 +292,18 @@ function prevTab(elem) {
 
 </fieldset>
 </form>
-<button type="button" class="padding-top btn btn-primary next-step">Save and continue</button>
-                    </div>
-                    <script>
-     $(document).ready(function(){
-      var i=1;
-     $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='hazardname"+i+"' type='text' placeholder='Enter a short description here' class='form-control input-md'  /> </td><td><input  name='severity"+i+"' type='number' placeholder='On a scale of 1-10, how dangerous is the hazard?'  class='form-control input-md'></td><td><input  name='notes"+i+"' type='text' placeholder='Add other notes here'  class='form-control input-md'></td>");
+<button type="button" onclick="showUser('int', industry.value, 'ID')" class="padding-top btn btn-primary next-step">Save and continue</button> 
+<!--Cafe is static, should make dynamic-->
+</div>
+<script>
+    $(document).ready(function(){
+        var i=1;
+        $("#add_row").click(function(){
+            $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='hazardname"+i+"' type='text' placeholder='Enter a short description here' class='form-control input-md'  /> </td><td><input  name='severity"+i+"' type='number' placeholder='On a scale of 1-10, how dangerous is the hazard?'  class='form-control input-md'></td><td><input  name='notes"+i+"' type='text' placeholder='Add other notes here'  class='form-control input-md'></td>");
 
-      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-      i++; 
-  });
+            $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+            i++; 
+        });
      $("#delete_row").click(function(){
     	 if(i>1){
 		 $("#addr"+(i-1)).html('');
@@ -318,6 +319,7 @@ function prevTab(elem) {
                         <p>Our AI thinks the following things are possibly a hazard in your business... <br>
                         This doesn't necesssarily a comprehensive list so please think of any more than are applicable</p>
                         <!---Nested Scroll Here-->
+                        <div id="output">Data here</div>
                         
                         <div class="container">
     <div class="row clearfix">
@@ -432,27 +434,33 @@ function prevTab(elem) {
 </div>
 </div>
 <script id="source" language="javascript" type="text/javascript">
-  function showUser(str) {
-    if (str == "") {
-        document.getElementById("output").innerHTML = "";
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200 && this.responseText != null) {
-                document.getElementById("output").innerHTML = this.responseText;
+  function showUser(type, str, col) {
+    for (var index = 1; index <= 4; index++) {
+    
+        if (str == "") {
+            //document.getElementById("output").innerHTML = "";
+            return;
+        } else { 
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
             } else {
-                document.getElementById("output").innerHTML = "<div>Something went wrong...</div>"
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-        };
-        xmlhttp.open("GET","db.php?q="+str,true);
-        xmlhttp.send();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200 && this.responseText != null) {
+                    alert(this.responseText);
+                    var jsonObj = JSON.parse(this.responseText);               
+                    document.getElementById("output").innerHTML += jsonObj[0]['RiskPlan'];
+
+                } else {
+                    // document.getElementById("output").innerHTML += "<div>Something went wrong...</div>"
+                }
+            };
+            xmlhttp.open("GET","database.php?t="+type+"&q="+index+"&c="+col,true);  
+            xmlhttp.send();
+        }
     }
   }
 
