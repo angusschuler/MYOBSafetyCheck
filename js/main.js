@@ -12,7 +12,7 @@ function getData(type, str, col) {
         }
         xmlhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200 && this.responseText != null) {
-                alert(this.responseText);
+                // alert(this.responseText);
                 var jsonObj = JSON.parse(this.responseText);
                 hazardList(jsonObj);
             } else {
