@@ -276,49 +276,44 @@ function prevTab(elem) {
                         <h3>Organisation Details</h3>
                         <p>Tell us a bit about your business so we can suggest relevant hazards and risks</p>
                         <div class="row clearfix"></div>
-		<div class="col-md-12 column">
-                <form class="form-horizontal">
+		<div class="col-md-12" style="margin-bottom: 10px;">
+               
+<form class="form-horizontal">
 <fieldset>
 
-<legend></legend>
-
-<!-- Text input-->
+<!-- Search input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="orgname">Name of the Organisation</label>  
+  <label class="col-md-5 control-label" for="orgname">Name of the Organisation</label>
   <div class="col-md-5">
-  <input id="orgname" name="orgname" type="text" placeholder="" class="form-control input-md">
-    
+    <input id="orgname" name="orgname" type="text" placeholder="e.g. John's Plumbing" class="form-control input-md">
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="employeenum">Number of employees</label>  
-  <div class="col-md-1">
-  <input id="employeenum" name="employeenum" type="number" placeholder="" class="form-control input-sml" required="">
-    
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="dutyholder">Name of Duty Holder</label>  
+  <label class="col-md-5 control-label" for="industry">Type of Organisation</label>  
   <div class="col-md-5">
-  <input id="dutyholder" name="dutyholder" type="text" placeholder="" class="form-control input-md" required="">
-  <span class="help-block">This is the person who is responsible for H&amp;S</span>  
-  </div>
-</div>
-
-<!-- Select Basic -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="industry">Industry</label>
-  <div class="col-md-5">
-    <select id="industry" name="industry" class="form-control">
+  <select id="industry" name="industry" class="form-control">
       <option value="1">Farming</option>
       <option value="2">Hospitality</option>
       <option value="3">Office</option>
       <option value="4">Services (e.g. Plumbing, Electrician)</option>
     </select>
+  </div>
+</div>
+
+<!-- Password input-->
+<div class="form-group">
+  <label class="col-md-5 control-label" for="name">Name of Duty Holder</label>
+  <div class="col-md-5">
+    <input id="name" name="name" type="text" placeholder="e.g. John Appleseed" class="form-control input-md">
+  </div>
+</div>
+
+<div class="form-group">
+  <label class="col-md-5 control-label" for="passwordinput">Number of Employees</label>
+  <div class="col-md-1">
+    <input id="employeenum" name="employeenum" type="number" placeholder="" class="form-control input-md" required="">
   </div>
 </div>
 
@@ -367,7 +362,7 @@ $(document).ready( function() {
     </script>
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <h3>Upload and Risk Suggestions</h3>
-                        <p>Using our computer vision technology, we will attempt to identify risks based on photos of your organisation</p>
+                        <p>Using Azure computer vision technology, we will attempt to identify risks based on photos of your organisation</p>
                         <!-- Photo Upload Part -->
                         <div class="form-group">
                 <label class="btn btn-primary btn-info-full">
@@ -376,7 +371,7 @@ $(document).ready( function() {
         <img id='img-upload'/>
     </div>
     <!--/photo upload -->
-                        <ul class="list-inline pull-right">
+                        <ul class="list-inline">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
@@ -449,7 +444,7 @@ $(document).ready( function() {
 	</div>
 	<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 </div>
-                        <ul class="list-inline pull-right">
+                        <ul class="list-inline">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
                         </ul>
@@ -459,48 +454,26 @@ $(document).ready( function() {
                         <p>Our AI thinks the following strategies apply to your hazards... <br>Please evaluate these carefully so that you are ensuring legal compliance! Check the <a href="http://www.worksafe.govt.nz">Worksafe Site</a> for more details!</p>
                         <div class="container">
     <div class="row clearfix">
-		<div class="col-md-3 column">
+		<div class="col-md-12 column">
             <ol class="list-group">
-                <li class="list-group-item">Cuts</li>
-                <li class="list-group-item">Burns</li>
-                <li class="list-group-item">Trips</li>
+                <li class="list-group-item">
+<h4 class="list-group-item-heading">Cuts</h4>
+<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
+                </li>
+                <li class="list-group-item">
+<h4 class="list-group-item-heading">Burns</h4>
+<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
+                </li>
+                <li class="list-group-item">
+<h4 class="list-group-item-heading">Trips</h4>
+<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
+                </li>
             </ol>
-		</div>
-        <div class="col-md-9 column">
-			<table class="table table-hover" id="tab_logic">
-				<thead>
-					<tr >
-						<th class="text-center">
-							Hazard Name
-						</th>
-						<th class="text-center">
-							Risk Management Strategy
-						</th>
-						<th class="text-center">
-							Notes
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id='addr0'>
-						<td>
-						<input type="text" name='hazardname0'  placeholder='Enter a short description here' class="form-control"/>
-						</td>
-						<td>
-						<input type="number" name='severity0' placeholder='On a scale of 1-10, how dangerous is the hazard?' class="form-control"/>
-						</td>
-						<td>
-						<input type="text" name='notes0' placeholder='Add other notes here' class="form-control"/>
-						</td>
-					</tr>
-                    <tr id='addr1'></tr>
-				</tbody>
-			</table>
 		</div>
 	</div>
 	<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 </div>
-                        <ul class="list-inline pull-right">
+                        <ul class="list-inline">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
