@@ -25,17 +25,14 @@ function getData(type, str, col) {
 }
 
 function hazardList(jsonObj) {
-    $('#wkslist').empty();
+    $('#hzrdList').empty();
     jsonObj.forEach(function (element) {
         if (element != null) {
-            var li = $('<li><input type="checkbox" name="' + element['Name'] + '" id="' + element['Name'] + '"/>' +
-            '<label for="' + element['Name'] + '"></label></li>');
-            li.find('label').text(element['Name']);
-            $('#wkslist').append(li);
-            //document.getElementById("wkslist").innerHTML += li;
+            
+             var li = $('<li href="#" class="list-group-item">' + element['Name'] + '<input type="checkbox" class="pull-right"></li>');
+            $('#hzrdList').append(li);
         }
     }, this);
-    var li = $('<li><input type="checkbox" name="Other" id="Other"/><label for="Other"></label></li>');
-    li.find('label').text('Other');
-    $('#wkslist').append(li);
+    var li = $('<li href="#" class="list-group-item">Other<input type="checkbox" class="pull-right"></li>');
+    $('#hzrdList').append(li);
 }

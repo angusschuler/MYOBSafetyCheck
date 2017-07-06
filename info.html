@@ -10,6 +10,18 @@
   <script src="./js/bootstrap.js"></script>
   <link rel="stylesheet" href="./css/bootstrap.css">
   <style>
+    #wkslist {
+        list-style-type: none;
+        padding: 0;
+    }
+    .state-icon {
+    left: -5px;
+    }
+    .list-group-item-primary {
+    color: rgb(255, 255, 255);
+    background-color: rgb(66, 139, 202);
+    }
+
   .container-fluid {
       padding-top: 1%;
       padding-bottom: 1%;
@@ -330,18 +342,41 @@ function prevTab(elem) {
 
 });
 </script>
-                    <!-- Hazard ID Pane -->
-                    <div class="tab-pane" role="tabpanel" id="step3">
-                        <h3>Hazard Identification</h3>
-                        <p>Our AI thinks the following things are possibly a hazard in your business... <br>
-                        This doesn't necesssarily a comprehensive list so please think of any more than are applicable</p>
-                        <!---Nested Scroll Here-->
-                        <div id="output"></div>
-                        <ul id="wkslist"></ul>
+    <!-- Hazard ID Pane -->
+    <div class="tab-pane" role="tabpanel" id="step3">
+    <h3>Hazard Identification</h3>
+    <p>Our AI thinks the following things are possibly a hazard in your business... <br>
+    This doesn't necesssarily a comprehensive list so please think of any more than are applicable</p>
+    <!---Nested Scroll Here-->
                         
-                        <div class="container">
-    <div class="row clearfix">
-		<div class="col-md-12 column">
+    <div class="container">
+    <div class="row"> <!--clearfix">-->
+    <!--Hazard Checkboxes-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <h3>Industry Hazards</h3>
+                <div id="hzrdList" class="list-group">
+                    
+                    <li class="list-group-item">Second item <input type="checkbox" class="pull-right"></li>
+                </div>
+                </div>
+                <div class="col-md-2 v-center">
+                    <button title="Send to list 2" class="btn btn-default center-block add"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                    <button title="Send to list 1" class="btn btn-default center-block remove"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                </div>
+                <div class="col-sm-4">
+            <h3>Your Hazards</h3>
+                <div id="finalHzrdList" class="list-group">
+                    <!--<a href="#" class="list-group-item">Alpha <input type="checkbox" class="pull-right"></a>
+                    <a href="#" class="list-group-item">Charlie <input type="checkbox" class="pull-right"></a>
+                    <a href="#" class="list-group-item">Bravo <input type="checkbox" class="pull-right"></a>-->
+                </div>
+                </div>
+            </div>
+        </div>
+
+		<!--<div class="col-md-12 column">
 			<table class="table table-bordered table-hover" id="tab_logic">
 				<thead>
 					<tr >
@@ -377,7 +412,7 @@ function prevTab(elem) {
                     <tr id='addr1'></tr>
 				</tbody>
 			</table>
-		</div>
+		</div>-->
 	</div>
 	<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 </div>
@@ -452,5 +487,7 @@ function prevTab(elem) {
 </div>
 </div>
 <script id="source" language="javascript" type="text/javascript" src="./js/main.js"></script>
+<script id="source" language="javascript" type="text/javascript" src="./js/checkedListGroup.js"></script>
+
 </body>
 </html>
