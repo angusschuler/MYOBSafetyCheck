@@ -156,6 +156,29 @@ span.round-tab:hover {
         position: absolute;
         left: 35%;
     }
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 50%;
+    min-height: 50%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+#img-upload{
+    width: 50%;
+}
 }
   </style>
   <script>
@@ -217,7 +240,7 @@ function prevTab(elem) {
                     <li role="presentation" class="disabled">
                         <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
                             <span class="round-tab">
-                                <i class="glyphicon glyphicon-info-sign"></i>
+                                <i class="glyphicon glyphicon-picture"></i>
                             </span>
                         </a>
                     </li>
@@ -252,6 +275,8 @@ function prevTab(elem) {
                     <div class="tab-pane active" role="tabpanel" id="step1">
                         <h3>Organisation Details</h3>
                         <p>Tell us a bit about your business so we can suggest relevant hazards and risks</p>
+                        <div class="row clearfix"></div>
+		<div class="col-md-12 column">
                 <form class="form-horizontal">
 <fieldset>
 
@@ -278,7 +303,7 @@ function prevTab(elem) {
 <!-- Text input-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="dutyholder">Name of Duty Holder</label>  
-  <div class="col-md-4">
+  <div class="col-md-5">
   <input id="dutyholder" name="dutyholder" type="text" placeholder="" class="form-control input-md" required="">
   <span class="help-block">This is the person who is responsible for H&amp;S</span>  
   </div>
@@ -299,13 +324,58 @@ function prevTab(elem) {
 
 </fieldset>
 </form>
+		</div>
 <button type="button" class="padding-top btn btn-primary next-step">Save and continue</button>
                     </div>
 <!-- Image Upload -->
+<script>
+$(document).ready( function() {
+    	$(document).on('change', '.btn-file :file', function() {
+		var input = $(this),
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+		input.trigger('fileselect', [label]);
+		});
+
+		$('.btn-file :file').on('fileselect', function(event, label) {
+		    
+		    var input = $(this).parents('.input-group').find(':text'),
+		        log = label;
+		    
+		    if( input.length ) {
+		        input.val(log);
+		    } else {
+		        if( log ) alert(log);
+		    }
+	    
+		});
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+		        
+		        reader.onload = function (e) {
+		            $('#img-upload').attr('src', e.target.result);
+		        }
+		        
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		}
+
+		$("#imgInp").change(function(){
+		    readURL(this);
+		}); 	
+	});
+    </script>
                     <div class="tab-pane" role="tabpanel" id="step2">
                         <h3>Upload and Risk Suggestions</h3>
                         <p>Using our computer vision technology, we will attempt to identify risks based on photos of your organisation</p>
-                        <a href="dashboard.html" role="button" class="btn btn-primary btn-info-full">Go to Dashboard</a>
+                        <!-- Photo Upload Part -->
+                        <div class="form-group">
+                <label class="btn btn-primary btn-info-full">
+                    Upload photo <input type="file" id="imgInp" style="display:none;">
+                </label>
+        <img id='img-upload'/>
+    </div>
+    <!--/photo upload -->
                         <ul class="list-inline pull-right">
                             <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
@@ -386,21 +456,25 @@ function prevTab(elem) {
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step4">
                         <h3>Risk Management</h3>
-                        <p>Our AI thinks the following strategies apply to your hazards... <br>Please evaluate these carefully so that you are being legally compliant!</p>
+                        <p>Our AI thinks the following strategies apply to your hazards... <br>Please evaluate these carefully so that you are ensuring legal compliance! Check the <a href="http://www.worksafe.govt.nz">Worksafe Site</a> for more details!</p>
                         <div class="container">
     <div class="row clearfix">
-		<div class="col-md-12 column">
-			<table class="table table-bordered table-hover" id="tab_logic">
+		<div class="col-md-3 column">
+            <ol class="list-group">
+                <li class="list-group-item">Cuts</li>
+                <li class="list-group-item">Burns</li>
+                <li class="list-group-item">Trips</li>
+            </ol>
+		</div>
+        <div class="col-md-9 column">
+			<table class="table table-hover" id="tab_logic">
 				<thead>
 					<tr >
-						<th class="text-center">
-							Number
-						</th>
 						<th class="text-center">
 							Hazard Name
 						</th>
 						<th class="text-center">
-							Severity
+							Risk Management Strategy
 						</th>
 						<th class="text-center">
 							Notes
@@ -409,9 +483,6 @@ function prevTab(elem) {
 				</thead>
 				<tbody>
 					<tr id='addr0'>
-						<td>
-						1
-						</td>
 						<td>
 						<input type="text" name='hazardname0'  placeholder='Enter a short description here' class="form-control"/>
 						</td>
