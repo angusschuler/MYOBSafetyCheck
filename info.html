@@ -282,17 +282,17 @@ function prevTab(elem) {
   <label class="col-md-4 control-label" for="industry">Industry</label>
   <div class="col-md-5">
     <select id="industry" name="industry" class="form-control">
-      <option value="1">Farming</option>
-      <option value="2">Hospitality</option>
-      <option value="3">Office</option>
-      <option value="4">Services (e.g. Plumbing, Electrician)</option>
+      <option value="1">Cafe</option>
+      <option value="2">Petrol Station</option>
+      <option value="3">Hairdresser</option>
+      <option value="4">Office</option>
     </select>
   </div>
 </div>
 
 </fieldset>
 </form>
-<button type="button" onclick="showUser('int', industry.value, 'ID')" class="padding-top btn btn-primary next-step">Save and continue</button> 
+<button type="button" onclick="getData('int', industry.value, 'ID')" class="padding-top btn btn-primary next-step">Save and continue</button> 
 <!--Cafe is static, should make dynamic-->
 </div>
 <script>
@@ -319,7 +319,8 @@ function prevTab(elem) {
                         <p>Our AI thinks the following things are possibly a hazard in your business... <br>
                         This doesn't necesssarily a comprehensive list so please think of any more than are applicable</p>
                         <!---Nested Scroll Here-->
-                        <div id="output">Data here</div>
+                        <div id="output"></div>
+                        <ul id="wkslist"></ul>
                         
                         <div class="container">
     <div class="row clearfix">
@@ -433,37 +434,6 @@ function prevTab(elem) {
    </div>
 </div>
 </div>
-<script id="source" language="javascript" type="text/javascript">
-  function showUser(type, str, col) {
-    for (var index = 1; index <= 4; index++) {
-    
-        if (str == "") {
-            //document.getElementById("output").innerHTML = "";
-            return;
-        } else { 
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (this.readyState == 4 && this.status == 200 && this.responseText != null) {
-                    alert(this.responseText);
-                    var jsonObj = JSON.parse(this.responseText);               
-                    document.getElementById("output").innerHTML += jsonObj[0]['RiskPlan'];
-
-                } else {
-                    // document.getElementById("output").innerHTML += "<div>Something went wrong...</div>"
-                }
-            };
-            xmlhttp.open("GET","database.php?t="+type+"&q="+index+"&c="+col,true);  
-            xmlhttp.send();
-        }
-    }
-  }
-
-  </script>
+<script id="source" language="javascript" type="text/javascript" src="./js/main.js"></script>
 </body>
 </html>

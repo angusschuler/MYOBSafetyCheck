@@ -16,6 +16,8 @@ $type = $_GET['t'];
 $q = $_GET['q'];
 $col = $_GET['c'];
 
+// SELECT * FROM   {val})
+
 //--------------------------------------------------------------------------
 // 1) Connect to mysql database
 //--------------------------------------------------------------------------
@@ -31,7 +33,7 @@ if ($type == "str") {
     $query = "SELECT DISTINCT * FROM $tableName WHERE $col = '".$q."'";
     
 } elseif ($type == "int") {
-    $query = "SELECT * FROM $tableName WHERE ".$col." = ".intval($q);
+    $query = "SELECT * FROM Hazard WHERE ID IN (SELECT IndustryHasHazard.Hazard FROM IndustryHasHazard WHERE IndustryHasHazard.Industry = ".intval($q).")";
 }
 $results = sqlsrv_query($con, $query);        //fetch result    
 
