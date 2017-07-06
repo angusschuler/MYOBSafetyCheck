@@ -5,11 +5,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--jQuery Script-->
-  <script src="./node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="./js/jquery.js"></script>
   <!--Bootstrap Script-->
-  <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+  <script src="./js/bootstrap.js"></script>
+  <link rel="stylesheet" href="./css/bootstrap.css">
   <style>
   .container-fluid {
       padding-top: 1%;
@@ -264,13 +263,13 @@ function prevTab(elem) {
 <div class="form-group">
   <label class="col-md-4 control-label" for="employeenum">Number of employees</label>  
   <div class="col-md-1">
-  <input id="employeenum" name="employeenum" type="text" placeholder="" class="form-control input-md" required="">
+  <input id="employeenum" name="employeenum" type="number" placeholder="" class="form-control input-sml" required="">
     
   </div>
 </div>
 
 <!-- Text input-->
-<div class="form-group">
+<div class="form-group paddin">
   <label class="col-md-4 control-label" for="dutyholder">Name of Duty Holder</label>  
   <div class="col-md-4">
   <input id="dutyholder" name="dutyholder" type="text" placeholder="" class="form-control input-md" required="">
@@ -417,9 +416,11 @@ function prevTab(elem) {
                             <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
                         </ul>
                     </div>
+
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3>All done!</h3>
-                        <p>Now that your details, hazards and risks have been profiled, we have compiled a PDF health and safety document that you can download below</p>
+                        <p>Now that your details, hazards and risks have been profiled, you can access your SafetyCheck Dashboard and download your health and safety plan</p>
+                        <a href="dashboard.html" role="button" class="btn btn-primary btn-info-full">Go to Dashboard</a>
                     </div>
 
                     <div class="clearfix"></div>
