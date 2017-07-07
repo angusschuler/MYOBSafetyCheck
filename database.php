@@ -14,7 +14,7 @@ $connectionOptions = array(
 
 $type = $_GET['t'];
 $q = $_GET['q'];
-$col = $_GET['c'];
+
 
 // SELECT * FROM   {val})
 
@@ -29,10 +29,18 @@ if (!$con) {
 //--------------------------------------------------------------------------
 // 2) Query database for data
 //--------------------------------------------------------------------------
-if ($type == "str") {
-    $query = "SELECT DISTINCT * FROM $tableName WHERE $col = '".$q."'";
+if ($type == "Risks") {
+    $q=json_decode($q);
+    $query = "SELECT * FROM Hazard WHERE Name IN (";
+    for ($i=0; $i < count($q); $i++) { 
+        $query .= "'".$q[$i]."'";
+        if ($i != count($q) - 1){
+            $query .= ", ";
+        }
+    }
+    $query .= ")";
     
-} elseif ($type == "int") {
+} elseif ($type == "Hazards") {
     $query = "SELECT * FROM Hazard WHERE ID IN (SELECT IndustryHasHazard.Hazard FROM IndustryHasHazard WHERE IndustryHasHazard.Industry = ".intval($q).")";
 }
 $results = sqlsrv_query($con, $query);        //fetch result    

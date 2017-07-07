@@ -24,37 +24,37 @@ $('.remove').click(function(){
     });
 });
 
-/* toggle all checkboxes in group */
-$('.all').click(function(e){
-	e.stopPropagation();
-	var $this = $(this);
-    if($this.is(":checked")) {
-    	$this.parents('.list-group').find("[type=checkbox]").prop("checked",true);
-    }
-    else {
-    	$this.parents('.list-group').find("[type=checkbox]").prop("checked",false);
-        $this.prop("checked",false);
-    }
-});
+// /* toggle all checkboxes in group */
+// $('.all').click(function(e){
+// 	e.stopPropagation();
+// 	var $this = $(this);
+//     if($this.is(":checked")) {
+//     	$this.parents('.list-group').find("[type=checkbox]").prop("checked",true);
+//     }
+//     else {
+//     	$this.parents('.list-group').find("[type=checkbox]").prop("checked",false);
+//         $this.prop("checked",false);
+//     }
+// });
 
-$('[type=checkbox]').click(function(e){
-  e.stopPropagation();
-});
+// $('[type=checkbox]').click(function(e){
+//   e.stopPropagation();
+// });
 
-/* toggle checkbox when list group item is clicked */
-$('.list-group a').click(function(e){
+// /* toggle checkbox when list group item is clicked */
+// $('.list-group a').click(function(e){
   
-    e.stopPropagation();
+//     e.stopPropagation();
   
-  	var $this = $(this).find("[type=checkbox]");
-    if($this.is(":checked")) {
-    	$this.prop("checked",false);
-    }
-    else {
-    	$this.prop("checked",true);
-    }
+//   	var $this = $(this).find("[type=checkbox]");
+//     if($this.is(":checked")) {
+//     	$this.prop("checked",false);
+//     }
+//     else {
+//     	$this.prop("checked",true);
+//     }
   
-    if ($this.hasClass("all")) {
-    	$this.trigger('click');
-    }
-});
+//     if ($this.hasClass("all")) {
+//     	$this.trigger('click');
+//     }
+// });

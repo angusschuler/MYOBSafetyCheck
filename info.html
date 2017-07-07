@@ -297,20 +297,22 @@ function prevTab(elem) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="orgname">Name of the Organisation</label>
   <div class="col-md-5">
-    <input id="orgname" name="orgname" type="text" placeholder="e.g. John's Plumbing" class="form-control input-md">
+    <input id="orgname" type="text" placeholder="e.g. John's Plumbing" class="form-control input-md">
+    <span class="help-block"></span>
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="industry">Industry</label>
+  <label class="col-md-5 control-label" for="industry">Industry</label>
   <div class="col-md-5">
-    <select id="industry" name="industry" class="form-control">
+    <select id="industry" class="form-control">
       <option value="1">Cafe</option>
       <option value="2">Petrol Station</option>
       <option value="3">Hairdresser</option>
       <option value="4">Office</option>
     </select>
+    <span class="help-block"></span>
   </div>
 </div>
 
@@ -318,21 +320,23 @@ function prevTab(elem) {
 <div class="form-group">
   <label class="col-md-5 control-label" for="name">Name of Duty Holder</label>
   <div class="col-md-5">
-    <input id="name" name="name" type="text" placeholder="e.g. John Appleseed" class="form-control input-md">
+    <input id="name" type="text" placeholder="e.g. John Appleseed" class="form-control input-md">
+    <span class="help-block"></span>
   </div>
 </div>
 
 <div class="form-group">
   <label class="col-md-5 control-label" for="passwordinput">Number of Employees</label>
   <div class="col-md-1">
-    <input id="employeenum" name="employeenum" type="number" placeholder="" class="form-control input-md" required="">
+    <input id="employeenum" type="number" placeholder="" class="form-control input-md" required="">
+    <span class="help-block"></span>
   </div>
 </div>
 
 </fieldset>
 </form>
 		</div>
-<button type="button" onclick="getData('int', industry.value, 'ID')" class="padding-top btn btn-primary next-step">Save and continue</button>
+<button type="button" onclick="getHazard('Hazards', industry.value)" class="padding-top btn btn-primary next-step">Save and continue</button>
                     </div>
 <!-- Image Upload -->
 <script>
@@ -389,24 +393,7 @@ $(document).ready( function() {
                         </ul>
                     </div>
 <!-- Image Upload Pane End -->
-                    <script>
-     $(document).ready(function(){
-      var i=1;
-     $("#add_row").click(function(){
-      $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='hazardname"+i+"' type='text' placeholder='Enter a short description here' class='form-control input-md'  /> </td><td><input  name='severity"+i+"' type='number' placeholder='On a scale of 1-10, how dangerous is the hazard?'  class='form-control input-md'></td><td><input  name='notes"+i+"' type='text' placeholder='Add other notes here'  class='form-control input-md'></td>");
 
-      $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
-      i++; 
-  });
-     $("#delete_row").click(function(){
-    	 if(i>1){
-		 $("#addr"+(i-1)).html('');
-		 i--;
-		 }
-	 });
-
-});
-</script>
     <!-- Hazard ID Pane -->
     <div class="tab-pane" role="tabpanel" id="step3">
     <h3>Hazard Identification</h3>
@@ -421,100 +408,50 @@ $(document).ready( function() {
             <div class="row">
                 <div class="col-sm-4 col-sm-offset-1">
                     <h3>Industry Hazards</h3>
-                <div id="hzrdList" class="list-group">
-                    
-                    <li class="list-group-item">Second item <input type="checkbox" class="pull-right"></li>
-                </div>
+                    <div id="hzrdList" class="list-group"></div>
                 </div>
                 <div class="col-md-2 v-center">
-                    <button title="Send to list 2" class="btn btn-default center-block add"><i class="glyphicon glyphicon-chevron-right"></i></button>
-                    <button title="Send to list 1" class="btn btn-default center-block remove"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                    <button type="button" title="Send to Your Hazard List" class="btn btn-default center-block add"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                    <button type="button" title="Send to Hazard List" class="btn btn-default center-block remove"><i class="glyphicon glyphicon-chevron-left"></i></button>
                 </div>
                 <div class="col-sm-4">
-            <h3>Your Hazards</h3>
-                <div id="finalHzrdList" class="list-group">
-                    <!--<a href="#" class="list-group-item">Alpha <input type="checkbox" class="pull-right"></a>
-                    <a href="#" class="list-group-item">Charlie <input type="checkbox" class="pull-right"></a>
-                    <a href="#" class="list-group-item">Bravo <input type="checkbox" class="pull-right"></a>-->
-                </div>
+                    <h3>Your Hazards</h3>
+                    <div id="finalHzrdList" class="list-group"></div>
                 </div>
             </div>
         </div>
-
-		<!--<div class="col-md-12 column">
-			<table class="table table-bordered table-hover" id="tab_logic">
-				<thead>
-					<tr >
-						<th class="text-center">
-							Number
-						</th>
-						<th class="text-center">
-							Hazard Name
-						</th>
-						<th class="text-center">
-							Severity
-						</th>
-						<th class="text-center">
-							Notes
-						</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr id='addr0'>
-						<td>
-						1
-						</td>
-						<td>
-						<input type="text" name='hazardname0'  placeholder='Enter a short description here' class="form-control"/>
-						</td>
-						<td>
-						<input type="number" name='severity0' placeholder='On a scale of 1-10, how dangerous is the hazard?' class="form-control"/>
-						</td>
-						<td>
-						<input type="text" name='notes0' placeholder='Add other notes here' class="form-control"/>
-						</td>
-					</tr>
-                    <tr id='addr1'></tr>
-				</tbody>
-			</table>
-		</div>-->
 	</div>
-	<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
 </div>
-                        <ul class="list-inline">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary next-step">Save and continue</button></li>
-                        </ul>
-                    </div>
-                    <div class="tab-pane" role="tabpanel" id="step4">
-                        <h3>Risk Management</h3>
-                        <p>Our AI thinks the following strategies apply to your hazards... <br>Please evaluate these carefully so that you are ensuring legal compliance! Check the <a href="http://www.worksafe.govt.nz">Worksafe Site</a> for more details!</p>
-                        <div class="container">
-    <div class="row clearfix">
-		<div class="col-md-12 column">
-            <ol class="list-group">
-                <li class="list-group-item">
-<h4 class="list-group-item-heading">Cuts</h4>
-<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
-                </li>
-                <li class="list-group-item">
-<h4 class="list-group-item-heading">Burns</h4>
-<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
-                </li>
-                <li class="list-group-item">
-<h4 class="list-group-item-heading">Trips</h4>
-<textarea class="form-control" value="">Ensure that sharp objects are stored appropriately e.g. in a sheath or container. Have disinfectant and first aid handy</textarea>
-                </li>
-            </ol>
-		</div>
-	</div>
-	<a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="pull-right btn btn-default">Delete Row</a>
+<ul class="list-inline">
+    <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+    <script>function getHazardList() {
+                var items = document.getElementById("finalHzrdList").children;
+                var list = [];
+                for (var i = 0; i < items.length; i++) {
+                    list.push(items[i].getAttribute("name"));
+                }
+                return JSON.stringify(list);
+    }</script>
+    <li><button type="button" onclick="getRisk('Risks', getHazardList())" class="btn btn-primary next-step">Save and continue</button></li>
+</ul>
 </div>
-                        <ul class="list-inline">
-                            <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                            <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
-                        </ul>
-                    </div>
+<div class="tab-pane" role="tabpanel" id="step4">
+    <h3>Risk Management</h3>
+    <p>Our AI thinks the following strategies apply to your hazards... <br>Please evaluate these carefully so that you are ensuring legal compliance! Check the <a href="http://www.worksafe.govt.nz">Worksafe Site</a> for more details!</p>
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <ol id="riskList" class="list-group">
+                    
+                </ol>
+            </div>
+        </div>
+    </div>
+    <ul class="list-inline">
+        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+        <li><button type="button" class="btn btn-primary btn-info-full next-step">Save and continue</button></li>
+    </ul>
+</div>
 
                     <div class="tab-pane" role="tabpanel" id="complete">
                         <h3>All done!</h3>
